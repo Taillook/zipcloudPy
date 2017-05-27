@@ -6,7 +6,12 @@ def main(zipcode):
     url = "http://zipcloud.ibsnet.co.jp/api/search"
     param = {"zipcode": zipcode}
 
-    res = requests.get(url, params=param)
+    try:
+        res = requests.get(url, params=param)
+    except requests.exceptions.ConnectionError as err:
+        print(err)
+        return
+
     address = json.loads(res.text)["results"][0]
 
     print(address["address1"] + address["address2"] + address["address3"])
