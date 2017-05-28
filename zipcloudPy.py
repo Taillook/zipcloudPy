@@ -9,7 +9,7 @@ def main(zipcode):
     try:
         res = requests.get(url, params=param)
     except requests.exceptions.ConnectionError as err:
-        print(err)
+        print("ConnectionError.")
         return
 
     address = json.loads(res.text)["results"][0]
